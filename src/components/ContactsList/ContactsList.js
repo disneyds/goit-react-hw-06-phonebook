@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import s from './ContactsList.module.css';
 import defImg from './defAvaCir.png';
-export default function ContactsList({ contacts, onDelete }) {
+import phonebookActions from '../../redux/phonebook/phonebookActions';
+
+function ContactsList({ contacts, onDelete }) {
   return (
     <TransitionGroup component="ul" className={s.list}>
       {contacts.map(({ name, number, id }) => (
@@ -27,6 +30,22 @@ export default function ContactsList({ contacts, onDelete }) {
   );
 }
 
+const getVisibleConatacts = (contacts, filter) => {
+  return contacts.filter(({ name }) =>
+    name.toLowerCase().includes(filter.toLowerCase()),
+  );
+};
+
+const mapStateToProps = ({ phonebook }) => ({
+  contacts: getVisibleConatacts(phonebook.contacts, phonebook.filter),
+});
+
+const mapDispatchToProps = dispatch => ({
+  onDelete: id => dispatch(phonebookActions.deleteContact(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactsList);
+
 ContactsList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.exact({
@@ -35,4 +54,5 @@ ContactsList.propTypes = {
       number: PropTypes.string.isRequired,
     }).isRequired,
   ),
+  filter: PropTypes.string,
 };
