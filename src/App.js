@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Container from './components/Container/Container';
 import Form from './components/Form/Form';
@@ -7,37 +7,35 @@ import Filter from './components/Filter/Filter';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 
-class App extends Component {
-  render() {
-    return (
-      <Container>
-        <div className="phoneBook">
-          <CSSTransition
-            in={true}
-            appear={true}
-            timeout={500}
-            classNames="Title"
-            unmountOnExit
-          >
-            <h1>Контакты</h1>
-          </CSSTransition>
+function App({ contacts }) {
+  return (
+    <Container>
+      <div className="phoneBook">
+        <CSSTransition
+          in={true}
+          appear={true}
+          timeout={500}
+          classNames="Title"
+          unmountOnExit
+        >
+          <h1>Контакты</h1>
+        </CSSTransition>
 
-          <Form />
+        <Form />
 
-          <CSSTransition
-            in={this.props.contacts.length > 1}
-            timeout={250}
-            classNames="Filter"
-            unmountOnExit
-          >
-            <Filter />
-          </CSSTransition>
+        <CSSTransition
+          in={contacts.length > 1}
+          timeout={250}
+          classNames="Filter"
+          unmountOnExit
+        >
+          <Filter />
+        </CSSTransition>
 
-          <ContactsList />
-        </div>
-      </Container>
-    );
-  }
+        <ContactsList />
+      </div>
+    </Container>
+  );
 }
 
 const mapStateToProps = state => ({
