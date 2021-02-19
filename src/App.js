@@ -8,19 +8,6 @@ import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 
 class App extends Component {
-  // componentDidMount() {
-  //   const parsedContacts = JSON.parse(localStorage.getItem('numbers'));
-  //   if (parsedContacts) {
-  //     this.setState({ contacts: parsedContacts });
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.contacts.length !== prevState.contacts.length) {
-  //     localStorage.setItem('numbers', JSON.stringify(this.state.contacts));
-  //   }
-  // }
-
   render() {
     return (
       <Container>

@@ -7,26 +7,30 @@ import phonebookActions from '../../redux/phonebook/phonebookActions';
 
 function ContactsList({ contacts, onDelete }) {
   return (
-    <TransitionGroup component="ul" className={s.list}>
-      {contacts.map(({ name, number, id }) => (
-        <CSSTransition key={id} timeout={250} classNames={s}>
-          <li className={s.contact}>
-            <img src={defImg} className={s.avatar} alt="avatar" />
-            <div className={s.discription}>
-              <span className={s.name}>{name} </span>
-              <span className={s.number}> {number} </span>
-            </div>
-            <button
-              type="button"
-              onClick={() => onDelete(id)}
-              className={s.button}
-            >
-              <p className={s.delete}>&#9940;</p>
-            </button>
-          </li>
-        </CSSTransition>
-      ))}
-    </TransitionGroup>
+    <>
+      {contacts.length > 0 && (
+        <TransitionGroup component="ul" className={s.list}>
+          {contacts.map(({ name, number, id }) => (
+            <CSSTransition key={id} timeout={250} classNames={s}>
+              <li className={s.contact}>
+                <img src={defImg} className={s.avatar} alt="avatar" />
+                <div className={s.discription}>
+                  <span className={s.name}>{name} </span>
+                  <span className={s.number}> {number} </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onDelete(id)}
+                  className={s.button}
+                >
+                  <p className={s.delete}>&#9940;</p>
+                </button>
+              </li>
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
+      )}
+    </>
   );
 }
 

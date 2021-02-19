@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import phonebookActions from './phonebookActions';
+import { loadContacts } from '../../services/localData';
 
-const contactsReducer = createReducer([], {
+const contactsReducer = createReducer(loadContacts(), {
   [phonebookActions.addContact]: (state, { payload }) => [payload, ...state],
   [phonebookActions.deleteContact]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
