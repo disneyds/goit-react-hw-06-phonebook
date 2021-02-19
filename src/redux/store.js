@@ -1,11 +1,6 @@
-// import { combineReducers } from 'redux';
 import logger from 'redux-logger';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import phonebookReducer from './phonebook/phonebookReducer';
-
-// const rootReducer = combineReducers({
-//   phonebook: phonebookReducer,
-// });
 
 const middleware = [...getDefaultMiddleware(), logger];
 const store = configureStore({
